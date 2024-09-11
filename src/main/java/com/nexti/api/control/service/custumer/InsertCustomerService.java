@@ -15,6 +15,6 @@ public class InsertCustomerService {
 
     public Long insert(CustomerDto customerDto) {
         var queryParameterDto = mountQueryParameterCustomerService.insertCustomer(customerDto);
-        return peopleRepository.insert(queryParameterDto);
+        return peopleRepository.create(queryParameterDto);
     }
 }

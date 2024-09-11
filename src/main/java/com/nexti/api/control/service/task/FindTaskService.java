@@ -15,6 +15,6 @@ public class FindTaskService {
 
     public Long insert(TaskDto taskDto) {
         var queryParameterDto = mountQueryParameterTaskServer.insertTask(taskDto);
-        return taskRepository.insert(queryParameterDto);
+        return taskRepository.create(queryParameterDto);
     }
 }

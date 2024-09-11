@@ -4,22 +4,21 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
-import java.time.LocalDate;
+import java.time.*;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PersonDto {
-        @NotBlank
+public class PersonUpdateDto {
         private String name;
-        @NotBlank
         private String enrolment;
         @Email
         private String email;
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
         private LocalDate admissionDate;
-        @NotBlank
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
+        private LocalDateTime lastUpdateDate;
         private String externalId;
         private Long customerId;
 }
