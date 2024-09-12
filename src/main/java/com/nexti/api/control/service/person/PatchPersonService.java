@@ -28,8 +28,7 @@ public class PatchPersonService {
     }
 
     private void validFields(PersonPatchDto personPatchDto) {
-        var allFieldsNull = ! NextiUtil.nonNull(personPatchDto.getEmail(),
-                                                         personPatchDto.getEnrolment(),
+        var allFieldsNull = ! NextiUtil.nonNull(personPatchDto.getEnrolment(),
                                                          personPatchDto.getName());
         if(allFieldsNull)
             throw new BusinessException("SOME_FIELD_MUST_BE_INFORMED");
@@ -43,9 +42,6 @@ public class PatchPersonService {
 
         if(Objects.nonNull(personPatchDto.getEnrolment()))
             person.setEnrolment(personPatchDto.getEnrolment());
-
-        if(Objects.nonNull(personPatchDto.getEmail()))
-            person.setEmail(personPatchDto.getEmail());
 
         return person;
     }

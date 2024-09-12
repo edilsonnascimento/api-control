@@ -17,8 +17,5 @@ public class PersonUpdateDto {
         private String email;
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
         private LocalDate admissionDate;
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
-        private LocalDateTime lastUpdateDate;
         private String externalId;
-        private Long customerId;
 }

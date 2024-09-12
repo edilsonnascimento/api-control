@@ -18,11 +18,13 @@ repositories {
 }
 
 dependencies {
+
 	implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 
 	compileOnly("org.projectlombok:lombok:1.18.34")
+
 	annotationProcessor("org.projectlombok:lombok:1.18.34")
 
 	runtimeOnly("com.mysql:mysql-connector-j")
@@ -31,6 +33,10 @@ dependencies {
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 	testCompileOnly("org.projectlombok:lombok:1.18.34")
 	testAnnotationProcessor("org.projectlombok:lombok:1.18.34")
+	testImplementation("com.github.javafaker:javafaker:1.0.2") {
+		exclude(module = "org.yaml")
+	}
+	testImplementation("org.yaml:snakeyaml:1.26")
 }
 
 tasks.withType<Test> {

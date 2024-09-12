@@ -45,7 +45,7 @@ public abstract class MountQueryParameter {
         parameter.addValue("email", person.getEmail(), Types.VARCHAR);
         parameter.addValue("admissionDate", Date.valueOf(person.getAdmissionDate()), Types.DATE);
         parameter.addValue("externalId", person.getExternalId(), Types.VARCHAR);
-        parameter.addValue("lastUpdateDate", Timestamp.valueOf(person.getLastUpdateDate()), Types.TIMESTAMP);
+        parameter.addValue("lastUpdateDate", Timestamp.valueOf(LocalDateTime.now()), Types.TIMESTAMP);
         parameter.addValue("personId", personId, Types.INTEGER);
         return new QueryParameterDto(sql, parameter);
     }

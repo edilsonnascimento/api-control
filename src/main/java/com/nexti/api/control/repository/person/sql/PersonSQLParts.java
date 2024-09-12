@@ -58,7 +58,6 @@ public class PersonSQLParts {
                                       email = :email,
                                       admission_date = :admissionDate,
                                       external_id = :externalId,
-                                      customer_id = :customerId,
                                       last_update_date = :lastUpdateDate
                     WHERE id = :personId;
                     """;
@@ -67,7 +66,6 @@ public class PersonSQLParts {
                     """
                     UPDATE person SET name = :name,
                                       enrolment = :enrolment,
-                                      email = :email,
                                       last_update_date = :lastUpdateDate
                     WHERE id = :personId;
                     """;

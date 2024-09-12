@@ -81,7 +81,6 @@ public class GlobalExceptionHandler {
         return forStatusAndDetail(HttpStatus.BAD_REQUEST, "REQUIRED_BODY");
     }
 
-
     @ExceptionHandler(DuplicateKeyException.class)
     ProblemDetail handleDuplicateKeyException(DuplicateKeyException e) {
         LOG.warn("{}", e.getMessage(), e);

@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/control-test
+    username: nexti
+    password: t0ps3cr3t
+  data:
+    redis:
+      host: localhost
+      port: 6379

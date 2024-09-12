@@ -28,7 +28,7 @@ public class UpdatePersonService {
         person.setEnrolment(personUpdateDto.getEnrolment());
         person.setEmail(personUpdateDto.getEmail());
         person.setAdmissionDate(personUpdateDto.getAdmissionDate());
-        person.setLastUpdateDate(personUpdateDto.getLastUpdateDate());
+        person.setExternalId(personUpdateDto.getExternalId());
         return person;
     }
 }
