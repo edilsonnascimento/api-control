@@ -7,7 +7,7 @@ import com.nexti.api.control.repository.person.impl.PersonRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
 
 @Service
 public class FindPersonResponseService {
@@ -17,8 +17,8 @@ public class FindPersonResponseService {
     @Autowired
     private PersonRepositoryImpl personRepository;
 
-    public PersonResponseDto find(Long personId) {
-        var queryParameterDto = mountQueryParameterPersonService.find(personId);
+    public PersonResponseDto find(UUID personUuid) {
+        var queryParameterDto = mountQueryParameterPersonService.find(personUuid);
         var people = personRepository.find(queryParameterDto)
                 .orElseThrow(() ->new NotFoundException("PERSON_NOT_FOUND"));
         return mapPersonResponse(people);
@@ -34,6 +34,7 @@ public class FindPersonResponseService {
                 .externalId(person.getExternalId())
                 .registerDate(person.getRegisterDate())
                 .lastUpdateDate(person.getLastUpdateDate())
+                .uuid(person.getUuid())
                 .build();
     }
 }

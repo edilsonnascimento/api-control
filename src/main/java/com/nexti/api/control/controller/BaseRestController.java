@@ -2,14 +2,16 @@ package com.nexti.api.control.controller;
 
 import org.springframework.http.ResponseEntity;
 
+import java.util.UUID;
+
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
 public class BaseRestController {
 
-    protected ResponseEntity<Void> responseCreated(Long id) {
+    protected ResponseEntity<Void> responseCreated(UUID uuid) {
         var location = fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(id)
+                .path("/{uuid}")
+                .buildAndExpand(uuid)
                 .toUri();
         return ResponseEntity.created(location).build();
     }

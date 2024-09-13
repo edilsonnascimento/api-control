@@ -33,7 +33,7 @@ public class FindPeopleService {
     }
 
     private static PersonResponseDto apply(Person person) {
-        return new PersonResponseDto().builder()
+        return PersonResponseDto.builder()
                 .name(person.getName())
                 .enrolment(person.getEnrolment())
                 .email(person.getEmail())
@@ -41,6 +41,7 @@ public class FindPeopleService {
                 .externalId(person.getExternalId())
                 .registerDate(person.getRegisterDate())
                 .lastUpdateDate(person.getLastUpdateDate())
+                .uuid(person.getUuid())
                 .build();
     }
 }

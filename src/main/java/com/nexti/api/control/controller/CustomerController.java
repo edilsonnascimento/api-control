@@ -1,6 +1,6 @@
 package com.nexti.api.control.controller;
 
-import com.nexti.api.control.dto.*;
+import com.nexti.api.control.dto.CustomerDto;
 import com.nexti.api.control.service.custumer.InsertCustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +15,7 @@ public class CustomerController extends BaseRestController {
 
     @PostMapping("/")
     public ResponseEntity<Void> create(@RequestBody CustomerDto customerDto) {
-        var customerId = insertCustomerService.insert(customerDto);
-        return responseCreated(customerId);
+        var uuid = insertCustomerService.insert(customerDto);
+        return responseCreated(uuid);
     }
 }

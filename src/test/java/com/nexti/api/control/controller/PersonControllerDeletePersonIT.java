@@ -25,7 +25,7 @@ class PersonControllerDeletePersonIT extends TestIntegrationHelper {
 
         // When
         webTestClient
-                .delete().uri(URI_BASE + "/1")
+                .delete().uri(URI_BASE + "/adc48803-71d9-11ef-8bff-0242ac110002")
                 .exchange()
         // Then
                 .expectStatus().isNoContent()

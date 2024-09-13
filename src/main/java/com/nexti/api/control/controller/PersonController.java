@@ -9,6 +9,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/v1/people")
 @RequiredArgsConstructor
@@ -29,34 +31,34 @@ public class PersonController extends BaseRestController {
         return findPeopleService.find(pageable);
     }
 
-    @GetMapping("/{personId}")
-    public PersonResponseDto findPerson(@PathVariable Long personId) {
-        return findPersonResponseService.find(personId);
+    @GetMapping("/{uuid}")
+    public PersonResponseDto findPerson(@PathVariable(value = "uuid") UUID personUuid) {
+        return findPersonResponseService.find(personUuid);
     }
 
     @PostMapping("/")
     public ResponseEntity<Void> create(@Valid @RequestBody PersonDto personDto) {
-        var personId = insertPersonService.insert(personDto);
-        return responseCreated(personId);
+        UUID uuidCreated = insertPersonService.insert(personDto);
+        return responseCreated(uuidCreated);
     }
 
-    @PutMapping("/{personId}")
-    public ResponseEntity<Void> update(@PathVariable Long personId,
+    @PutMapping("/{uuid}")
+    public ResponseEntity<Void> update(@PathVariable(value = "uuid") UUID personUuid,
                                        @Valid @RequestBody PersonUpdateDto personUpdateDto) {
-        updatePersonService.update(personUpdateDto, personId);
+        updatePersonService.update(personUpdateDto, personUuid);
         return responseNoContent();
     }
 
-    @PatchMapping("/{personId}")
-    public ResponseEntity<Void> patch(@PathVariable Long personId,
+    @PatchMapping("/{uuid}")
+    public ResponseEntity<Void> patch(@PathVariable(value = "uuid") UUID personUuid,
                                       @Valid @RequestBody PersonPatchDto personPatchDto) {
-        patchPersonService.patch(personPatchDto, personId);
+        patchPersonService.patch(personPatchDto, personUuid);
         return responseNoContent();
     }
 
-    @DeleteMapping("/{personId}")
-    public ResponseEntity<Void> delete(@PathVariable Long personId) {
-        deletePersonService.delete(personId);
+    @DeleteMapping("/{uuid}")
+    public ResponseEntity<Void> delete(@PathVariable(value = "uuid") UUID personUuid) {
+        deletePersonService.delete(personUuid);
         return responseNoContent();
     }
 }

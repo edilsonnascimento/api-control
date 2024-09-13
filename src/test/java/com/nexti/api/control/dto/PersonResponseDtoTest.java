@@ -4,6 +4,7 @@ import helper.TestUnitHelper;
 import org.junit.jupiter.api.Test;
 
 import java.time.*;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -20,13 +21,15 @@ class PersonResponseDtoTest extends TestUnitHelper {
         var externalId = "12212AAAA";
         var registerDate = LocalDateTime.of(2024, 10, 12, 13, 50, 50);
         var lastUpdateDate = LocalDateTime.of(2024, 11, 12, 11, 29, 10);
+        var uuid = UUID.randomUUID();
         var expected = new PersonResponseDto(name,
                                              enrolment,
                                              email,
                                              admissionDate,
                                              externalId,
                                              registerDate,
-                                             lastUpdateDate);
+                                             lastUpdateDate,
+                                             uuid);
         // When
         var actual = new PersonResponseDto(name,
                                              enrolment,
@@ -34,7 +37,8 @@ class PersonResponseDtoTest extends TestUnitHelper {
                                              admissionDate,
                                              externalId,
                                              registerDate,
-                                             lastUpdateDate);
+                                             lastUpdateDate,
+                                             uuid);
         // Then
         assertThat(actual).isEqualTo(expected);
     }

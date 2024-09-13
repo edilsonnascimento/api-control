@@ -6,30 +6,32 @@ import com.nexti.api.control.repository.person.sql.PersonSQLParts;
 import com.nexti.api.control.service.common.MountQueryParameter;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class MountQueryParameterPersonService extends MountQueryParameter {
 
-    public QueryParameterDto insertPerson(PersonDto personDto) {
-        return applyFieldsPerson(personDto, PersonSQLParts.INSERT);
+    public QueryParameterDto insertPerson(Person person) {
+        return applyFieldsPerson(person, PersonSQLParts.INSERT);
     }
 
-    public QueryParameterDto find(Long personId) {
-        return applyFieldPersonId(personId, PersonSQLParts.FIND);
+    public QueryParameterDto find(UUID personUuid) {
+        return applyFieldPersonUuid(personUuid, PersonSQLParts.FIND);
     }
 
     public QueryParameterDto findAll() {
         return applySql(PersonSQLParts.FIND_ALL);
     }
 
-    public QueryParameterDto updatePerson(Person person, Long personId) {
-        return applyFieldsUpdatePerson(person, personId, PersonSQLParts.UPDATE);
+    public QueryParameterDto updatePerson(Person person) {
+        return applyFieldsUpdatePerson(person, PersonSQLParts.UPDATE);
     }
 
-    public QueryParameterDto patchPerson(Person person, Long personId) {
-        return applyFieldsPathPerson(person, personId, PersonSQLParts.PATCH);
+    public QueryParameterDto patchPerson(Person person) {
+        return applyFieldsPathPerson(person, PersonSQLParts.PATCH);
     }
 
-    public QueryParameterDto delete(Long personId) {
-        return applyFieldPersonId(personId, PersonSQLParts.DELETE);
+    public QueryParameterDto delete(UUID personUuid) {
+        return applyFieldPersonUuid(personUuid, PersonSQLParts.DELETE);
     }
 }

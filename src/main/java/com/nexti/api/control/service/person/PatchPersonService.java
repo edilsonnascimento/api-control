@@ -8,7 +8,7 @@ import com.nexti.api.control.util.NextiUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
+import java.util.*;
 
 @Service
 public class PatchPersonService {
@@ -20,10 +20,10 @@ public class PatchPersonService {
     @Autowired
     private FindPersonService findPersonService;
 
-    public void patch(PersonPatchDto personPatchDto, Long personId) {
+    public void patch(PersonPatchDto personPatchDto, UUID personUuid) {
         validFields(personPatchDto);
-        var person = getPatchPerson(personPatchDto, personId);
-        var queryParameterDto = mountQueryParameterPersonService.patchPerson(person, personId);
+        var person = getPatchPerson(personPatchDto, personUuid);
+        var queryParameterDto = mountQueryParameterPersonService.patchPerson(person);
         personRepository.update(queryParameterDto);
     }
 
@@ -34,8 +34,8 @@ public class PatchPersonService {
             throw new BusinessException("SOME_FIELD_MUST_BE_INFORMED");
     }
 
-    private Person getPatchPerson(PersonPatchDto personPatchDto, Long personId) {
-        var person = findPersonService.find(personId);
+    private Person getPatchPerson(PersonPatchDto personPatchDto, UUID personUuid) {
+        var person = findPersonService.find(personUuid);
 
         if(Objects.nonNull(personPatchDto.getName()))
             person.setName(personPatchDto.getName());

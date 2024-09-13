@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/v1/tasks")
 public class TaskController extends BaseRestController {
@@ -16,6 +18,6 @@ public class TaskController extends BaseRestController {
     @PostMapping("/")
     public ResponseEntity<Void> create(@RequestBody TaskDto taskDto) {
         var taskId = findTaskService.insert(taskDto);
-        return responseCreated(taskId);
+        return responseCreated(UUID.randomUUID());
     }
 }

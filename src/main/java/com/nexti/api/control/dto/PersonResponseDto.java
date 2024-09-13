@@ -3,6 +3,7 @@ package com.nexti.api.control.dto;
 import lombok.*;
 
 import java.time.*;
+import java.util.UUID;
 
 @Data
 @Builder
@@ -16,4 +17,5 @@ public class PersonResponseDto {
     private String externalId;
     private LocalDateTime registerDate;
     private LocalDateTime lastUpdateDate;
+    private UUID uuid;
 }

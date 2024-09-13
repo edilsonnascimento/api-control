@@ -5,7 +5,7 @@ import com.nexti.api.control.repository.common.BaseRepository;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import java.util.Objects;
+import java.util.*;
 
 @Repository
 public class PersonRepositoryImpl extends BaseRepository<Person>{
@@ -23,6 +23,7 @@ public class PersonRepositoryImpl extends BaseRepository<Person>{
                     .lastUpdateDate(Objects.isNull(result.getTimestamp("lastUpdateDate")) ? null :
                                             result.getTimestamp("lastUpdateDate").toLocalDateTime())
                     .customerId(result.getLong("customerId"))
+                    .uuid(UUID.fromString(result.getString("uuid")))
                     .build();
         }
 }

@@ -29,7 +29,7 @@ class PersonControllerPatchPersonIT extends TestIntegrationHelper {
 
         // When
         webTestClient
-                .patch().uri(URI_BASE + "/1")
+                .patch().uri(URI_BASE + "/adc48803-71d9-11ef-8bff-0242ac110002")
                 .bodyValue(personPatchDto)
                 .exchange()
         // Then

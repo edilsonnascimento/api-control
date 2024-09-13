@@ -3,6 +3,7 @@ package com.nexti.api.control.domain;
 import lombok.*;
 
 import java.time.*;
+import java.util.UUID;
 
 @Data
 @Builder
@@ -18,4 +19,5 @@ public class Person {
     private Long customerId;
     private LocalDateTime registerDate;
     private LocalDateTime lastUpdateDate;
+    private UUID uuid;
 }

@@ -6,9 +6,11 @@ public class CustomerSQLParts {
             """
             INSERT INTO customer (name,
                                   national_document,
-                                  email)
+                                  email,
+                                  uuid)
             VALUES (:name,
                     :nationalDocument,
-                    :email)
+                    :email,
+                    :customerUuid);
             """;
 }

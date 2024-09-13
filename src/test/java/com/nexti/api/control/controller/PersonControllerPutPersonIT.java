@@ -34,7 +34,7 @@ class PersonControllerPutPersonIT extends TestIntegrationHelper {
 
         // When
         webTestClient
-                .put().uri(URI_BASE + "/1")
+                .put().uri(URI_BASE + "/adc48803-71d9-11ef-8bff-0242ac110002")
                 .bodyValue(personUpdateDto)
                 .exchange()
         // Then

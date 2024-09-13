@@ -29,7 +29,7 @@ class PersonControllerGetPersonIT extends TestIntegrationHelper {
 
         // When
         webTestClient
-                .get().uri(URI_BASE + "/1")
+                .get().uri(URI_BASE + "/adc494fd-71d9-11ef-8bff-0242ac110002")
                 .exchange()
         // Then
                 .expectStatus().is2xxSuccessful()
@@ -76,10 +76,11 @@ class PersonControllerGetPersonIT extends TestIntegrationHelper {
 
         // Given
         when(securityService.getLoggedCustomerId()).thenReturn(1L);
+        var request = URI_BASE + "/" + "adc48803-71d9-11ef-8bff-0242ac110002";
 
         // When
         webTestClient
-                .get().uri(URI_BASE + "/100")
+                .get().uri(request)
                 .exchange()
         // Then
                 .expectStatus().isNotFound()
@@ -88,7 +89,7 @@ class PersonControllerGetPersonIT extends TestIntegrationHelper {
                 .jsonPath("$.title").isEqualTo("Not Found")
                 .jsonPath("$.status").isEqualTo(404)
                 .jsonPath("$.detail").isEqualTo("PERSON_NOT_FOUND")
-                .jsonPath("$.instance").isEqualTo("/v1/people/100")
+                .jsonPath("$.instance").isEqualTo(request)
                 .jsonPath("$.timestamp").isNotEmpty();
         verify(securityService, times(1)).getLoggedCustomerId();
     }

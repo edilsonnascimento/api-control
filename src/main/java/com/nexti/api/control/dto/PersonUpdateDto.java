@@ -1,10 +1,10 @@
 package com.nexti.api.control.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Email;
 import lombok.*;
 
-import java.time.*;
+import java.time.LocalDate;
 
 @Data
 @Builder

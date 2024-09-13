@@ -9,13 +9,15 @@ public class PersonSQLParts {
                                 email,
                                 admission_date,
                                 external_id,
-                                customer_id)
+                                customer_id,
+                                uuid)
             VALUES (:name,
                     :enrolment,
                     :email,
                     :admissionDate,
                     :externalId,
-                    :customerId);
+                    :customerId,
+                    :personUuid);
             """;
 
     public static final String FIND =
@@ -29,10 +31,11 @@ public class PersonSQLParts {
                           per.external_id AS externalId,
                           per.register_date AS registerDate,
                           per.last_update_date AS lastUpdateDate,
-                          per.customer_id AS customerId
+                          per.customer_id AS customerId,
+                          per.uuid
                     FROM  person AS per
                     WHERE per.customer_id = :customerId AND
-                          per.id = :personId;
+                          per.uuid = :personUuid;
                     """;
 
     public static final String FIND_ALL =
@@ -46,7 +49,8 @@ public class PersonSQLParts {
                           per.external_id AS externalId,
                           per.register_date AS registerDate,
                           per.last_update_date AS lastUpdateDate,
-                          per.customer_id AS customerId
+                          per.customer_id AS customerId,
+                          per.uuid
                     FROM  person AS per
                     WHERE per.customer_id = :customerId;
                     """;
@@ -57,9 +61,8 @@ public class PersonSQLParts {
                                       enrolment = :enrolment,
                                       email = :email,
                                       admission_date = :admissionDate,
-                                      external_id = :externalId,
-                                      last_update_date = :lastUpdateDate
-                    WHERE id = :personId;
+                                      external_id = :externalId
+                    WHERE uuid = :personUuid;
                     """;
 
     public static final String PATCH =
@@ -67,13 +70,13 @@ public class PersonSQLParts {
                     UPDATE person SET name = :name,
                                       enrolment = :enrolment,
                                       last_update_date = :lastUpdateDate
-                    WHERE id = :personId;
+                    WHERE uuid = :personUuid;
                     """;
 
     public static final String DELETE =
                     """
                     DELETE
-                    FROM person AS per
-                    WHERE per.id = :personId
+                    FROM person
+                    WHERE uuid = :personUuid
                     """;
 }

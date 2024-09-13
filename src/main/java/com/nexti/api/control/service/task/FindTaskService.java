@@ -13,8 +13,9 @@ public class FindTaskService {
     @Autowired
     private TaskRepositoryImpl taskRepository;
 
-    public Long insert(TaskDto taskDto) {
+    public String insert(TaskDto taskDto) {
         var queryParameterDto = mountQueryParameterTaskServer.insertTask(taskDto);
-        return taskRepository.create(queryParameterDto);
+        taskRepository.update(queryParameterDto);
+        return null;
     }
 }

@@ -1,12 +1,13 @@
 package com.nexti.api.control.service.common;
 
-import com.nexti.api.control.domain.Person;
+import com.nexti.api.control.domain.*;
 import com.nexti.api.control.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public abstract class MountQueryParameter {
 
@@ -28,17 +29,18 @@ public abstract class MountQueryParameter {
         return new QueryParameterDto(sql, parameter);
     }
 
-    protected QueryParameterDto applyFieldsPerson(PersonDto personDto, String sql) {
+    protected QueryParameterDto applyFieldsPerson(Person person, String sql) {
         MapSqlParameterSource parameter = createAndApplyFilterCustomer();
-        parameter.addValue("name", personDto.getName(), Types.VARCHAR);
-        parameter.addValue("enrolment", personDto.getEnrolment(), Types.VARCHAR);
-        parameter.addValue("email", personDto.getEmail(), Types.VARCHAR);
-        parameter.addValue("admissionDate", Date.valueOf(personDto.getAdmissionDate()), Types.DATE);
-        parameter.addValue("externalId", personDto.getExternalId(), Types.VARCHAR);
+        parameter.addValue("name", person.getName(), Types.VARCHAR);
+        parameter.addValue("enrolment", person.getEnrolment(), Types.VARCHAR);
+        parameter.addValue("email", person.getEmail(), Types.VARCHAR);
+        parameter.addValue("admissionDate", Date.valueOf(person.getAdmissionDate()), Types.DATE);
+        parameter.addValue("externalId", person.getExternalId(), Types.VARCHAR);
+        parameter.addValue("personUuid", person.getUuid(), Types.VARCHAR);
         return new QueryParameterDto(sql, parameter);
     }
 
-    protected QueryParameterDto applyFieldsUpdatePerson(Person person, Long personId, String sql) {
+    protected QueryParameterDto applyFieldsUpdatePerson(Person person, String sql) {
         MapSqlParameterSource parameter = createAndApplyFilterCustomer();
         parameter.addValue("name", person.getName(), Types.VARCHAR);
         parameter.addValue("enrolment", person.getEnrolment(), Types.VARCHAR);
@@ -46,31 +48,32 @@ public abstract class MountQueryParameter {
         parameter.addValue("admissionDate", Date.valueOf(person.getAdmissionDate()), Types.DATE);
         parameter.addValue("externalId", person.getExternalId(), Types.VARCHAR);
         parameter.addValue("lastUpdateDate", Timestamp.valueOf(LocalDateTime.now()), Types.TIMESTAMP);
-        parameter.addValue("personId", personId, Types.INTEGER);
+        parameter.addValue("personUuid", person.getUuid(), Types.VARCHAR);
         return new QueryParameterDto(sql, parameter);
     }
 
-    protected QueryParameterDto applyFieldsPathPerson(Person person, Long personId, String sql) {
+    protected QueryParameterDto applyFieldsPathPerson(Person person, String sql) {
         MapSqlParameterSource parameter = createAndApplyFilterCustomer();
         parameter.addValue("name", person.getName(), Types.VARCHAR);
         parameter.addValue("enrolment", person.getEnrolment(), Types.VARCHAR);
         parameter.addValue("email", person.getEmail(), Types.VARCHAR);
         parameter.addValue("lastUpdateDate", Timestamp.valueOf(LocalDateTime.now()), Types.TIMESTAMP);
-        parameter.addValue("personId", personId, Types.INTEGER);
+        parameter.addValue("personUuid", person.getUuid(), Types.VARCHAR);
         return new QueryParameterDto(sql, parameter);
     }
 
-    protected QueryParameterDto applyFieldsClient(CustomerDto clientDto, String sql) {
+    protected QueryParameterDto applyFieldsCustomer(Customer customer, String sql) {
         MapSqlParameterSource parameter = createAndApplyFilterCustomer();
-        parameter.addValue("name", clientDto.getName(), Types.VARCHAR);
-        parameter.addValue("nationalDocument", clientDto.getNationalDocument(), Types.VARCHAR);
-        parameter.addValue("email", clientDto.getEmail(), Types.VARCHAR);
+        parameter.addValue("name", customer.getName(), Types.VARCHAR);
+        parameter.addValue("nationalDocument", customer.getNationalDocument(), Types.VARCHAR);
+        parameter.addValue("email", customer.getEmail(), Types.VARCHAR);
+        parameter.addValue("customerUuid", customer.getUuid(), Types.VARCHAR);
         return new QueryParameterDto(sql, parameter);
     }
 
-    protected QueryParameterDto applyFieldPersonId(Long personId, String sql) {
+    protected QueryParameterDto applyFieldPersonUuid(UUID personUuid, String sql) {
         MapSqlParameterSource parameter = createAndApplyFilterCustomer();
-        parameter.addValue("personId", personId, Types.INTEGER);
+        parameter.addValue("personUuid", personUuid, Types.VARCHAR);
         return new QueryParameterDto(sql, parameter);
     }
     protected QueryParameterDto applySql(String sql) {

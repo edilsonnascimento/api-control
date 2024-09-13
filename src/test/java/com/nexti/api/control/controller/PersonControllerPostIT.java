@@ -1,7 +1,7 @@
 package com.nexti.api.control.controller;
 
 import com.nexti.api.control.dto.PersonDto;
-import com.nexti.api.control.service.common.SecurityService;
+import com.nexti.api.control.service.common.*;
 import helper.TestIntegrationHelper;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -9,6 +9,7 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 import static org.mockito.Mockito.*;
 
@@ -21,6 +22,9 @@ class PersonControllerPostIT extends TestIntegrationHelper {
 
     @MockBean
     private SecurityService securityService;
+    @MockBean
+    private UuidService uuidService;
+
 
     @Test
     @Sql(value = "/data/controller-person-post-before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
@@ -35,6 +39,9 @@ class PersonControllerPostIT extends TestIntegrationHelper {
         var externalId = "aaa";
         var personDto = new PersonDto(name, enrolment, email, admissionDate, externalId);
         when(securityService.getLoggedCustomerId()).thenReturn(1L);
+        var uuid = "adc494fd-71d9-11ef-8bff-0242ac110002";
+        var uuidRandom = UUID.fromString(uuid);
+        when(uuidService.random()).thenReturn(uuidRandom);
 
         // When
         webTestClient
@@ -42,9 +49,10 @@ class PersonControllerPostIT extends TestIntegrationHelper {
                 .bodyValue(personDto)
                 .exchange()
         // Then
-                .expectHeader().location("http://localhost:" + port + "/v1/people/1")
+                .expectHeader().location("http://localhost:" + port + "/v1/people/" + uuid)
                 .expectStatus().isCreated()
                 .expectBody().isEmpty();
         verify(securityService, times(1)).getLoggedCustomerId();
+        verify(uuidService, times(1)).random();
     }
 }

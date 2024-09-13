@@ -6,15 +6,6 @@
         <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
     </appender>
 
-    <springProfile name="prod">
-        <logger name="org.springframework" level="INFO" additivity="false">
-            <appender-ref ref="STDOUT"/>
-        </logger>
-        <root level="INFO">
-            <appender-ref ref="STDOUT"/>
-        </root>
-    </springProfile>
-
     <springProfile name="master">
         <logger name="org.springframework" level="INFO" additivity="false">
             <appender-ref ref="STDOUT"/>
@@ -24,16 +15,7 @@
         </root>
     </springProfile>
 
-    <springProfile name="qa">
-        <logger name="org.springframework" level="INFO" additivity="false">
-            <appender-ref ref="STDOUT"/>
-        </logger>
-        <root level="INFO">
-            <appender-ref ref="STDOUT"/>
-        </root>
-    </springProfile>
-
-    <springProfile name="local, dev, devapu, test, qa">
+    <springProfile name="local, test, default">
         <include resource="org/springframework/boot/logging/logback/base.xml"/>
         <logger name="org.springframework" level="INFO" additivity="false">
             <appender-ref ref="CONSOLE"/>

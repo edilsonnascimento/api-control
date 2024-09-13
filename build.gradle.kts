@@ -23,6 +23,8 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
+	implementation("net.logstash.logback:logstash-logback-encoder:8.0")
+	implementation("org.projectlombok:lombok:1.18.34")
 
 	compileOnly("org.projectlombok:lombok:1.18.34")
 
@@ -33,7 +35,6 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 	testCompileOnly("org.projectlombok:lombok:1.18.34")
-	testAnnotationProcessor("org.projectlombok:lombok:1.18.34")
 }
 
 tasks.withType<Test> {
