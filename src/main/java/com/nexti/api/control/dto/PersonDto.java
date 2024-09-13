@@ -21,5 +21,4 @@ public class PersonDto {
         private LocalDate admissionDate;
         @NotBlank
         private String externalId;
-        private Long customerId;
 }

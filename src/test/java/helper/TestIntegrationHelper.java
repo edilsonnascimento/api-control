@@ -19,4 +19,5 @@ public abstract class TestIntegrationHelper {
     protected NamedParameterJdbcTemplate namedParameter;
     @Autowired
     protected WebTestClient webTestClient;
+
 }

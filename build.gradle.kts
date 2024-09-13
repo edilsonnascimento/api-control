@@ -22,6 +22,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
+	implementation("org.springframework.boot:spring-boot-starter-webflux")
 
 	compileOnly("org.projectlombok:lombok:1.18.34")
 
@@ -33,10 +34,6 @@ dependencies {
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 	testCompileOnly("org.projectlombok:lombok:1.18.34")
 	testAnnotationProcessor("org.projectlombok:lombok:1.18.34")
-	testImplementation("com.github.javafaker:javafaker:1.0.2") {
-		exclude(module = "org.yaml")
-	}
-	testImplementation("org.yaml:snakeyaml:1.26")
 }
 
 tasks.withType<Test> {

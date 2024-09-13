@@ -23,9 +23,9 @@ public class PersonController extends BaseRestController {
 
     @GetMapping("/")
     public Page<PersonResponseDto> findPeople(@PageableDefault(page = 0,
-            size = 10,
-            sort = "enrolment",
-            direction = Sort.Direction.DESC) Pageable pageable) {
+                                                               size = 10,
+                                                               sort = "enrolment",
+                                                               direction = Sort.Direction.DESC) Pageable pageable) {
         return findPeopleService.find(pageable);
     }
 
