@@ -20,12 +20,12 @@ public abstract class MountQueryParameter {
                 .addValue("customerId", customerId, Types.INTEGER);
     }
 
-    protected QueryParameterDto applyFields(TaskDto taskDto, String sql) {
+    protected QueryParameterDto applyFields(Task task, String sql) {
         MapSqlParameterSource parameter = createAndApplyFilterCustomer();
-        parameter.addValue("description", taskDto.getDescription(), Types.VARCHAR);
-        parameter.addValue("status", taskDto.getStatus(), Types.VARCHAR);
-        parameter.addValue("personId", taskDto.getPersonId(), Types.INTEGER);
-        parameter.addValue("registerDate", taskDto.getRegisterDate(), Types.TIMESTAMP);
+        parameter.addValue("description", task.getDescription(), Types.VARCHAR);
+        parameter.addValue("status", task.getStatus(), Types.VARCHAR);
+        parameter.addValue("personId", task.getPersonId(), Types.INTEGER);
+        parameter.addValue("taskUuid", task.getUuid(), Types.VARCHAR);
         return new QueryParameterDto(sql, parameter);
     }
 
@@ -81,4 +81,9 @@ public abstract class MountQueryParameter {
         return new QueryParameterDto(sql, parameter);
     }
 
+    protected QueryParameterDto applyPersonId(Long personId, String sql) {
+        MapSqlParameterSource parameter = createAndApplyFilterCustomer();
+        parameter.addValue("personId", personId, Types.INTEGER);
+        return new QueryParameterDto(sql, parameter);
+    }
 }

@@ -1,6 +1,7 @@
 package com.nexti.api.control.controller;
 
 import com.nexti.api.control.dto.*;
+import com.nexti.api.control.service.person.FindPersonTasksService;
 import com.nexti.api.control.service.person.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -18,10 +19,11 @@ public class PersonController extends BaseRestController {
 
     private final InsertPersonService insertPersonService;
     private final FindPersonResponseService findPersonResponseService;
-    private final FindPeopleService findPeopleService;
+    private final FindPeopleResponseService findPeopleService;
     private final UpdatePersonService updatePersonService;
     private final PatchPersonService patchPersonService;
     private final DeletePersonService deletePersonService;
+    private final FindPersonTasksService findPersonTasksService;
 
     @GetMapping("/")
     public Page<PersonResponseDto> findPeople(@PageableDefault(page = 0,
@@ -34,6 +36,11 @@ public class PersonController extends BaseRestController {
     @GetMapping("/{uuid}")
     public PersonResponseDto findPerson(@PathVariable(value = "uuid") UUID personUuid) {
         return findPersonResponseService.find(personUuid);
+    }
+
+    @GetMapping("/{uuid}/tasks")
+    public PersonTasksResponseDto findPersonTasks(@PathVariable(value = "uuid") UUID personUuid) {
+        return findPersonTasksService.find(personUuid);
     }
 
     @PostMapping("/")

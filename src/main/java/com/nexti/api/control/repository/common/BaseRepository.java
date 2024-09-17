@@ -2,7 +2,7 @@ package com.nexti.api.control.repository.common;
 
 import com.nexti.api.control.dto.QueryParameterDto;
 import com.nexti.api.control.exception.NotFoundException;
-import com.nexti.api.control.util.NextiUtil;
+import com.nexti.api.control.util.ControlUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -22,14 +22,10 @@ public abstract class BaseRepository<T> {
         List<T> result = jdbcTemplate.query(queryParameterDto.sql(),
                                             queryParameterDto.parameter(),
                                             returnRowMapper());
-        return NextiUtil.arrayIsEmpty(result) ? Optional.empty() : Optional.of(result);
+        return ControlUtil.arrayIsEmpty(result) ? Optional.empty() : Optional.of(result);
     }
 
     protected abstract RowMapper<T> returnRowMapper();
-
-    public Long findByTotalRecord(QueryParameterDto queryParameterDto) {
-        return jdbcTemplate.queryForObject(queryParameterDto.sql(), queryParameterDto.parameter(), Long.class);
-    }
 
     public void delete(QueryParameterDto queryParameterDto) {
         int rowsAffected = jdbcTemplate.update(queryParameterDto.sql(), queryParameterDto.parameter());

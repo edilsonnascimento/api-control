@@ -4,7 +4,7 @@ import com.nexti.api.control.domain.Person;
 import com.nexti.api.control.dto.PersonPatchDto;
 import com.nexti.api.control.exception.BusinessException;
 import com.nexti.api.control.repository.person.impl.PersonRepositoryImpl;
-import com.nexti.api.control.util.NextiUtil;
+import com.nexti.api.control.util.ControlUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +28,7 @@ public class PatchPersonService {
     }
 
     private void validFields(PersonPatchDto personPatchDto) {
-        var allFieldsNull = ! NextiUtil.nonNull(personPatchDto.getEnrolment(),
+        var allFieldsNull = ControlUtil.arraysIsEmptyOrNull(personPatchDto.getEnrolment(),
                                                          personPatchDto.getName());
         if(allFieldsNull)
             throw new BusinessException("SOME_FIELD_MUST_BE_INFORMED");

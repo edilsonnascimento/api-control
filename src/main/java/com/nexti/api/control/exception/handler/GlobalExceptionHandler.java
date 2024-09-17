@@ -45,6 +45,14 @@ public class GlobalExceptionHandler {
         return problemDetail;
     }
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    ProblemDetail handleIllegalArgumentException(IllegalArgumentException e) {
+        LOG.warn("{}", e.getMessage(), e);
+        var problemDetail = forStatusAndDetail(HttpStatus.BAD_REQUEST, "INVALID_REQUEST_ARGUMENTS");
+        problemDetail.setProperty("timestamp", LocalDateTime.now());
+        return problemDetail;
+    }
+
     @ExceptionHandler(NullPointerException.class)
     ProblemDetail handleNullPointerException(NullPointerException e) {
         LOG.error("{}", e.getMessage(), e);

@@ -6,6 +6,8 @@ import com.nexti.api.control.repository.common.BaseRepository;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.*;
 
+import java.util.UUID;
+
 @Repository
 public class TaskRepositoryImpl extends BaseRepository<Task> {
 
@@ -18,6 +20,7 @@ public class TaskRepositoryImpl extends BaseRepository<Task> {
                 .personId(result.getLong("personId"))
                 .registerDate(result.getTimestamp("registerDate").toLocalDateTime())
                 .customerId(result.getLong("customerId"))
+                .uuid(UUID.fromString(result.getString("uuid")))
                 .build();
     }
 }

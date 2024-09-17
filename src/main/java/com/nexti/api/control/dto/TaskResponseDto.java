@@ -1,6 +1,6 @@
 package com.nexti.api.control.dto;
 
-import jakarta.validation.constraints.*;
+import com.nexti.api.control.enums.TaskStatus;
 import lombok.*;
 
 import java.util.UUID;
@@ -9,9 +9,8 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class TaskDto {
-    @NotBlank
+public class TaskResponseDto {
     private String description;
-    @NotNull
-    private UUID personUuid;
+    private TaskStatus status;
+    private UUID uuid;
 }

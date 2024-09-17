@@ -79,4 +79,18 @@ public class PersonSQLParts {
                     FROM person
                     WHERE uuid = :personUuid
                     """;
+
+    public static final String FIND_TASKS =
+            """
+            SELECT
+                  per.name AS name,
+                  per.enrolment AS enrolment,
+                  tas.description,
+                  tas.status,
+                  tas.uuid
+            FROM person AS per
+                JOIN task AS tas ON tas.person_id = per.id
+            WHERE per.customer_id = :customerId AND
+                  per.uuid = :personUuid
+            """;
 }

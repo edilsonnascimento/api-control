@@ -4,6 +4,7 @@ import com.nexti.api.control.enums.TaskStatus;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Data
 @Builder
@@ -17,4 +18,5 @@ public class Task {
     private Long personId;
     private LocalDateTime registerDate;
     private Long customerId;
+    private UUID uuid;
 }

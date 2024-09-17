@@ -2,7 +2,7 @@ package com.nexti.api.control.enums;
 
 public enum TaskStatus {
     ACTIVE,
-    CANCELED,
+    PENDING,
     PROCESS,
-    PENDING
+    CANCELED
 }
