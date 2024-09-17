@@ -45,7 +45,7 @@ public class PersonController extends BaseRestController {
 
     @PostMapping("/")
     public ResponseEntity<Void> create(@Valid @RequestBody PersonDto personDto) {
-        UUID uuidCreated = insertPersonService.insert(personDto);
+        var uuidCreated = insertPersonService.insert(personDto);
         return responseCreated(uuidCreated);
     }
 

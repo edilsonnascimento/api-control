@@ -21,7 +21,7 @@ class PersonControllerGetPersonIT extends TestIntegrationHelper {
 
     @Test
     @Sql(value = "/data/controller-person-get-person-before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-    @Sql(value = "/data/controller-person-after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @Sql(value = "/data/controller-after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     void GIVEN_Valid_Params_WHEN_Invoked_GET_Endpoint_THEN_Return_Person_And_200() {
 
         // Given
@@ -45,8 +45,33 @@ class PersonControllerGetPersonIT extends TestIntegrationHelper {
     }
 
     @Test
+    @Sql(value = "/data/controller-person-get-people-task-before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = "/data/controller-after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    void GIVEN_Valid_Request_WHEN_Invoked_GET_Endpoint_THEN_Return_People_Tasks_And_200() {
+
+        // Given
+        when(securityService.getLoggedCustomerId()).thenReturn(1L);
+
+        // When
+        webTestClient
+                .get().uri(URI_BASE + "/adc48803-71d9-11ef-8bff-0242ac110002/tasks")
+                .exchange()
+                // Then
+                .expectStatus().is2xxSuccessful()
+                .expectBody()
+                .jsonPath("$.name").isEqualTo("PEDRO")
+                .jsonPath("$.enrolment").isEqualTo("1234ABC")
+                .jsonPath("$.tasks[0].description").isEqualTo("Faith Helle")
+                .jsonPath("$.tasks[0].status").isEqualTo("ACTIVE")
+                .jsonPath("$.tasks[0].uuid").isEqualTo("ebfc9ffa-4997-436f-8733-08b7d08f67ae");
+
+        verify(securityService, times(2)).getLoggedCustomerId();
+    }
+
+
+    @Test
     @Sql(value = "/data/controller-person-get-people-before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-    @Sql(value = "/data/controller-person-after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @Sql(value = "/data/controller-after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     void GIVEN_Valid_Request_WHEN_Invoked_GET_Endpoint_THEN_Return_People_And_200() {
 
         // Given

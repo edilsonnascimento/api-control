@@ -17,7 +17,7 @@ class PersonControllerDeletePersonIT extends TestIntegrationHelper {
 
     @Test
     @Sql(value = "/data/controller-person-put-patch-delete-person-before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-    @Sql(value = "/data/controller-person-after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @Sql(value = "/data/controller-after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     void GIVEN_Valid_Params_WHEN_Invoked_DELETE_Endpoint_THEN_Return_Body_empty_And_204() {
 
         // Given
